@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout-dd274af4.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/_page-fc92ace3.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-a2a2194f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-d1dd279f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-db73ac4d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths-6cd3a76e.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-fe257cab.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/stores-46a439bb.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/logo-ec041307.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/data-2267eef7.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/app/_page.svelte-54e41c23.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/app/_page.ts-657f5554.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_page-348b1a66.js"><!-- HEAD_svelte-1s2n5i9_START --><script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU3H6lIvnp1fJxtMSm6qCbyyuvernVrsc&callback=initMap&libraries=places"></script><script>window.initMap = (position) => {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 16,
+                center: position,
+            });
+            return map;
+        }
+    </script><!-- HEAD_svelte-1s2n5i9_END -->
+	</head>
+	<body data-sveltekit-prefetch>
+		<div>
+
+
+
+
+<div class="app svelte-uf2qk9"><header class="svelte-eh9uz6"><div class="corner svelte-eh9uz6"><a href="/" class="svelte-eh9uz6"><img src="/_app/immutable/assets/logo-0da374d1.webp" alt="Home" class="svelte-eh9uz6"></a></div>
+
+    <nav class="svelte-eh9uz6"><div class="tabs tabs-boxed svelte-eh9uz6"><a href="/" class="tab svelte-eh9uz6">Home</a>
+                <a href="/about" class="tab svelte-eh9uz6">About</a>
+                <a href="/app" class="tab svelte-eh9uz6 tab-active">UKnoWHere</a></div></nav>
+
+    <div class="corner svelte-eh9uz6"><a href="/app/how-to-play" class="svelte-eh9uz6"><img src="/_app/immutable/assets/warning-4963f440.png" alt="Help" class="svelte-eh9uz6"></a></div>
+</header>
+    <main class="svelte-uf2qk9">
+
+<div class="hero svelte-lfg4wc"><div id="map" class="svelte-lfg4wc"></div>
+    <div class="hero-overlay bg-opacity-60"><div id="map-info" class="text-center my-1 w-full svelte-lfg4wc"><div class="bg-white inline-block p-2 px-4 google-map-box-shadow svelte-lfg4wc">Drag and Drop the marker to a location <br> with nearby places to play
+                </div></div></div></div>
+
+<form method="POST" action="?/enter" class="svelte-lfg4wc">
+
+    <div class="controls svelte-lfg4wc">
+        
+        
+        
+        
+        
+        
+        
+            <div class="keyboard svelte-lfg4wc"><button data-key="enter" aria-selected="true"  class="svelte-lfg4wc">enter
+                </button>
+
+                <button data-key="backspace" formaction="?/update" name="key" value="backspace" class="svelte-lfg4wc">back
+                </button>
+
+                <button data-key="tries" disabled class="svelte-lfg4wc">0</button>
+
+                <button data-key="score" disabled class="svelte-lfg4wc">0</button>
+
+                <div class="row svelte-lfg4wc"><button data-key="<" class=" svelte-lfg4wc" formaction="?/update" name="key" value="<">&lt;
+                            </button><button data-key="q" class=" svelte-lfg4wc" formaction="?/update" name="key" value="q">q
+                            </button><button data-key="w" class=" svelte-lfg4wc" formaction="?/update" name="key" value="w">w
+                            </button><button data-key="e" class=" svelte-lfg4wc" formaction="?/update" name="key" value="e">e
+                            </button><button data-key="r" class=" svelte-lfg4wc" formaction="?/update" name="key" value="r">r
+                            </button><button data-key="t" class=" svelte-lfg4wc" formaction="?/update" name="key" value="t">t
+                            </button><button data-key="y" class=" svelte-lfg4wc" formaction="?/update" name="key" value="y">y
+                            </button><button data-key="u" class=" svelte-lfg4wc" formaction="?/update" name="key" value="u">u
+                            </button><button data-key="i" class=" svelte-lfg4wc" formaction="?/update" name="key" value="i">i
+                            </button><button data-key="o" class=" svelte-lfg4wc" formaction="?/update" name="key" value="o">o
+                            </button><button data-key="p" class=" svelte-lfg4wc" formaction="?/update" name="key" value="p">p
+                            </button><button data-key=">" class=" svelte-lfg4wc" formaction="?/update" name="key" value=">">>
+                            </button>
+                    </div><div class="row svelte-lfg4wc"><button data-key="a" class=" svelte-lfg4wc" formaction="?/update" name="key" value="a">a
+                            </button><button data-key="s" class=" svelte-lfg4wc" formaction="?/update" name="key" value="s">s
+                            </button><button data-key="d" class=" svelte-lfg4wc" formaction="?/update" name="key" value="d">d
+                            </button><button data-key="f" class=" svelte-lfg4wc" formaction="?/update" name="key" value="f">f
+                            </button><button data-key="g" class=" svelte-lfg4wc" formaction="?/update" name="key" value="g">g
+                            </button><button data-key="h" class=" svelte-lfg4wc" formaction="?/update" name="key" value="h">h
+                            </button><button data-key="j" class=" svelte-lfg4wc" formaction="?/update" name="key" value="j">j
+                            </button><button data-key="k" class=" svelte-lfg4wc" formaction="?/update" name="key" value="k">k
+                            </button><button data-key="l" class=" svelte-lfg4wc" formaction="?/update" name="key" value="l">l
+                            </button>
+                    </div><div class="row svelte-lfg4wc"><button data-key="z" class=" svelte-lfg4wc" formaction="?/update" name="key" value="z">z
+                            </button><button data-key="x" class=" svelte-lfg4wc" formaction="?/update" name="key" value="x">x
+                            </button><button data-key="c" class=" svelte-lfg4wc" formaction="?/update" name="key" value="c">c
+                            </button><button data-key="v" class=" svelte-lfg4wc" formaction="?/update" name="key" value="v">v
+                            </button><button data-key="b" class=" svelte-lfg4wc" formaction="?/update" name="key" value="b">b
+                            </button><button data-key="n" class=" svelte-lfg4wc" formaction="?/update" name="key" value="n">n
+                            </button><button data-key="m" class=" svelte-lfg4wc" formaction="?/update" name="key" value="m">m
+                            </button>
+                    </div></div>
+        </div></form>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+    <footer class="flex items-center svelte-xke1gi"><div class="corner corner-left svelte-xke1gi"><a target="_blank" rel="noreferrer" href="https://github.com/cytey/uknowhere" class="svelte-xke1gi"><img src="/_app/immutable/assets/GitHub-Mark-120px-plus-78981108.png" alt="GitHub" class="svelte-xke1gi"></a></div>
+
+    <p class="w-full text-center text-xs px-14 svelte-xke1gi">Powered by
+        <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/" class="svelte-xke1gi">Google Maps Platform</a> |
+        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/" class="svelte-xke1gi">SvelteKit</a> |
+        <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/" class="svelte-xke1gi">Tailwind CSS</a> |
+        <a target="_blank" rel="noreferrer" href="https://daisyui.com/" class="svelte-xke1gi">DaisyUI</a> <br>
+        <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map" class="svelte-xke1gi">Map icons created by kmg design - Flaticon</a></p>
+
+    <div class="corner corner-right svelte-xke1gi"><a href="/app/leaderboard" class="svelte-xke1gi"><img src="/_app/immutable/assets/world-dffb12af.png" alt="Leaderboard" class="svelte-xke1gi"></a></div>
+</footer>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="1rjmozt">
+			import { start } from "./_app/immutable/start-a2a2194f.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 4],
+					params: {},
+					routeId: "app",
+					data: (function(a){return [a,a]}(null)),
+					form: null
+				},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="1rjmozt"]').parentNode,
+				trailing_slash: "never"
+			});
+		</script>
+	</div>
+	</body>
+</html>
