@@ -40,7 +40,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 0 0 1rem;
+        /*padding: 0 0 1rem;*/
         width: 100%;
         /*max-width: 64rem;*/
         margin: auto;

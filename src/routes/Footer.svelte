@@ -16,9 +16,10 @@
     <p class="w-full text-center text-xs px-14">
         Powered by
         <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/">Google Maps Platform</a> |
-        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/">SvelteKit</a> |
+        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/">SvelteKit</a> | <br/>
         <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/">Tailwind CSS</a> |
-        <a target="_blank" rel="noreferrer" href="https://daisyui.com/">DaisyUI</a> <br />
+        <a target="_blank" rel="noreferrer" href="https://daisyui.com/">DaisyUI</a> |
+        <a target="_blank" rel="noreferrer" href="https://pages.github.com/">GitHub Pages</a> <br/>
         <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map">Map icons created by kmg design - Flaticon</a>
     </p>
 
@@ -52,11 +53,11 @@
         right: -10px;
     }
 
-    .corner img {
-        width: 2em;
-        height: 2em;
-        object-fit: contain;
-    }
+    /*.corner img {*/
+    /*    width: 2em;*/
+    /*    height: 2em;*/
+    /*    object-fit: contain;*/
+    /*}*/
 
     p a {
         font-weight: 700;

@@ -1,0 +1,1 @@
+import{w as e}from"./singletons-d76d1e11.js";let a=localStorage.getItem("data");const o=e(a?JSON.parse(a):{});o.subscribe(t=>{t?localStorage.setItem("data",JSON.stringify(t)):localStorage.removeItem("data")});export{o as d};

@@ -408,6 +408,7 @@
         position: fixed;
         top: 120px;
         z-index: 999;
+        padding: 0 1rem;
     }
 
     .kbd {
@@ -421,7 +422,7 @@
 
     .hero {
         place-items: inherit;
-        height: calc(100vh - 200px);
+        height: calc(100vh - 270px);
     }
 
     #map {
