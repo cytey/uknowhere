@@ -28,7 +28,8 @@
         The problem I am trying to solve here is that people do not know their "here and where" well enough to be able to use it to their advantage to optimise their lives.
         I am using some of the latest web technologies to build this app.
         I hope this app can train someone to be well-versed in their "here and where".
-        I am also using this as an opportunity to add to my portfolio so I have a higher chance to join the google map team (Super hard to get in =)) and help Google improve their products.
+        At the same time, I hope this can help Google improve their place API.
+        You may view the source code <a class="underline font-semibold" target="_blank" rel="noreferrer" href="https://github.com/cytey/uknowhere">here</a>
     </p>
     <h1 class="text-2xl font-bold my-2 mt-14">Google Map APIs used</h1>
     <p class="my-4">

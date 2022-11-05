@@ -15,6 +15,7 @@
 
     /** The index of the current guess */
     // $: i = won ? -1 : data.answers.length;
+    $: won = false;
 
     /** Whether the current guess can be submitted */
     // $: submittable = data.guesses[i]?.length === 5;
@@ -25,6 +26,8 @@
      * used for styling the keyboard
      */
     let classnames: Record<string, 'exact' | 'close' | 'missing'>;
+
+    let map, marker, placeLatLng;
 
     $: {
         classnames = {};
@@ -54,35 +57,69 @@
         const key = (event.target as HTMLButtonElement).getAttribute(
             'data-key'
         );
-        if (key === 'backspace') {
-            // data.guesses[i] = guess.slice(0, -1);
-            if (underscoreIndex > 0) {
-                underscoreIndex--;
-                guess[underscoreArray[underscoreIndex]] = '_';
-            }
-            // if (form?.badGuess) form.badGuess = false;
-        } else {
-            // data.guesses[i] += key;
-            if (underscoreArray[underscoreIndex] < guess.length) {
-                guess[underscoreArray[underscoreIndex]] = key.toUpperCase();
-                underscoreIndex++;
-            }
+        switch (key) {
+            case 'backspace':
+                // data.guesses[i] = guess.slice(0, -1);
+                if (underscoreIndex > 0) {
+                    underscoreIndex--;
+                    guess[underscoreArray[underscoreIndex]] = '_';
+                }
+                // if (form?.badGuess) form.badGuess = false;
+                guesslah = guess;
+                break;
+            case '<':
+                placeIndex--;
+                if (placeIndex < 0) {
+                    placeIndex = placeNames.length - 1;
+                }
+                marker.setMap(null);
+                initGuess();
+                break;
+            case '>':
+                placeIndex++;
+                if (placeIndex >= placeNames.length) {
+                    placeIndex = 0;
+                }
+                marker.setMap(null);
+                initGuess();
+                break;
+            default:
+                // data.guesses[i] += key;
+                if (underscoreArray[underscoreIndex] < guess.length) {
+                    guess[underscoreArray[underscoreIndex]] = key.toUpperCase();
+                    underscoreIndex++;
+                }
+                guesslah = guess;
+                break;
         }
-        guesslah = guess;
     }
 
     function enter(event: MouseEvent) {
         let guess = guesslah.join('');
-        if (guess === places[placeIndex].toUpperCase()) {
+        if (guess === placeNames[placeIndex].toUpperCase()) {
             score++;
-            if (placeIndex < places.length - 1) {
-                placeIndex++;
-                initGuess();
+            const passed =
+                "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png";
+            marker = new google.maps.Marker({
+                position: placeLatLng,
+                draggable: false,
+                icon: passed,
+                map: map
+            });
+
+            if (score > 9) {
+                won = true;
             } else {
-                console.log('gameover');
+                if (placeIndex < placeNames.length - 1) {
+                    placeIndex++;
+                    initGuess();
+                }
             }
         } else {
             tries++;
+            if (score > 9) {
+                console.log('game over');
+            }
         }
     }
 
@@ -103,8 +140,8 @@
     onMount(() => {
         $dataStore.addressFlag = true;
         const googleAPAC = {lat: 1.276473557498751, lng: 103.79921450710519};
-        const map = initMap(googleAPAC);
-        const marker = new google.maps.Marker({
+        map = initMap(googleAPAC);
+        marker = new google.maps.Marker({
             position: googleAPAC,
             draggable: true,
             map: map
@@ -140,11 +177,11 @@
         underscoreIndex = 0;
         let guess = [];
         let underscores = [];
-        if (places.length) {
-            for (var i = 0; i < places[placeIndex].length; i++) {
-                if (rstlne.includes(places[placeIndex][i])) {
-                    guess.push(places[placeIndex][i]);
-                } else if (places[placeIndex][i] !== ' ') {
+        if (placeNames.length) {
+            for (var i = 0; i < placeNames[placeIndex].length; i++) {
+                if (rstlne.includes(placeNames[placeIndex][i])) {
+                    guess.push(placeNames[placeIndex][i]);
+                } else if (placeNames[placeIndex][i] !== ' ') {
                     underscores.push(i);
                     guess.push('_');
                 } else {
@@ -152,6 +189,16 @@
                 }
             }
         }
+        placeLatLng = places[placeIndex].geometry.location;
+        const info =
+            "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png";
+        marker = new google.maps.Marker({
+            position: placeLatLng,
+            draggable: false,
+            icon: info,
+            map: map
+        });
+        map.panTo(placeLatLng);
         underscoreArray = underscores;
         answerlah = guesslah = guess;
     }
@@ -189,6 +236,7 @@
     ]
 
     $: places = [];
+    $: placeNames = [];
     $: guesslah = [];
     $: answerlah = [];
     $: underscoreArray = [];
@@ -198,14 +246,14 @@
     let placeIndex = 0;
 
     const callbackPlaces = (results, status) => {
-        places = [];
+        placeNames = [];
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             let filteredResults = results.filter(val => wantedTypes.some(filter => val.types.includes(filter)))
-            filteredResults = filteredResults.filter(val => /^[A-Za-z\s]*$/.test(val.name))
+            places = filteredResults.filter(val => /^[A-Za-z\s]*$/.test(val.name))
             // TODO: filter answered too
-            for (var i = 0; i < filteredResults.length; i++) {
-                var place = filteredResults[i];
-                places.push(place.name.toUpperCase());
+            for (var i = 0; i < places.length; i++) {
+                var place = places[i];
+                placeNames.push(place.name.toUpperCase());
             }
         }
         initGuess();
@@ -224,8 +272,8 @@
     <div id="map"></div>
     <div class="hero-overlay bg-opacity-60">
         <div id="map-info" class="text-center my-1 w-full">
-            {#if places && places.length && guesslah.length}
-                {#each places[placeIndex].toString().split('') as letter, column}
+            {#if guesslah && placeNames.length && guesslah.length}
+                {#each placeNames[placeIndex].toString().split('') as letter, column}
                     {#if rstlne.includes(letter)}
                         <kbd class="kbd bg-success-content text-white">{letter}</kbd>
                     {:else if letter !== ' '}
@@ -288,72 +336,72 @@
         <!--        {won ? 'you won :)' : `game over :(`} play again?-->
         <!--    </button>-->
         <!--{:else}-->
-            <div class="keyboard">
-                <button
-                    on:click|preventDefault={enter}
-                    data-key="enter"
-                    aria-selected={submittable}
-                    disabled={!submittable}
-                >
-                    enter
-                </button>
+        <div class="keyboard">
+            <button
+                on:click|preventDefault={enter}
+                data-key="enter"
+                aria-selected={submittable}
+                disabled={!submittable}
+            >
+                enter
+            </button>
 
-                <button
-                    on:click|preventDefault={update}
-                    data-key="backspace"
-                    formaction="?/update"
-                    name="key"
-                    value="backspace"
-                >
-                    back
-                </button>
+            <button
+                on:click|preventDefault={update}
+                data-key="backspace"
+                formaction="?/update"
+                name="key"
+                value="backspace"
+            >
+                back
+            </button>
 
-                <button
-                    data-key="tries"
-                    disabled
-                >
-                    {tries}
-                </button>
+            <button
+                data-key="tries"
+                disabled
+            >
+                {tries}
+            </button>
 
-                <button
-                    data-key="score"
-                    disabled
-                >
-                    {score}
-                </button>
+            <button
+                data-key="score"
+                disabled
+            >
+                {score}
+            </button>
 
-                {#each ['<qwertyuiop>', 'asdfghjkl', 'zxcvbnm'] as row}
-                    <div class="row">
-                        {#each row as letter}
-                            <button
-                                on:click|preventDefault={update}
-                                data-key={letter}
-                                class={classnames[letter]}
-                                formaction="?/update"
-                                name="key"
-                                value={letter}
-                            >
-                                {letter}
-                            </button>
-                        {/each}
-                    </div>
-                {/each}
-            </div>
+            {#each ['<qwertyuiop>', 'asdfghjkl', 'zxcvbnm'] as row}
+                <div class="row">
+                    {#each row as letter}
+                        <button
+                            on:click|preventDefault={update}
+                            data-key={letter}
+                            class={classnames[letter]}
+                            formaction="?/update"
+                            name="key"
+                            value={letter}
+                        >
+                            {letter}
+                        </button>
+                    {/each}
+                </div>
+            {/each}
+        </div>
         <!--{/if}-->
     </div>
 </form>
 
-<!--{#if won}-->
-<!--    <div-->
-<!--        style="position: absolute; left: 50%; top: 30%"-->
-<!--        use:confetti={{-->
-<!--			force: 0.7,-->
-<!--			stageWidth: window.innerWidth,-->
-<!--			stageHeight: window.innerHeight,-->
-<!--			colors: ['#ff3e00', '#40b3ff', '#676778'] // Google logo colors-->
-<!--		}}-->
-<!--    />-->
-<!--{/if}-->
+{#if won}
+    <div
+        style="position: absolute; left: 50%; top: 30%"
+        use:confetti={{
+			force: 0.7,
+			stageWidth: window.innerWidth,
+			stageHeight: window.innerHeight,
+			colors: ['#ff3e00', '#40b3ff', '#676778'] // Google logo colors
+		}}
+    />
+{/if}
 
 <style>
     #map-info {
@@ -373,7 +421,7 @@
 
     .hero {
         place-items: inherit;
-        height: calc(100vh - 170px);
+        height: calc(100vh - 200px);
     }
 
     #map {

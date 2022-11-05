@@ -6,9 +6,11 @@
 
 <footer class="flex items-center">
     <div class="corner corner-left">
+        <!--
         <a target="_blank" rel="noreferrer" href="https://github.com/cytey/uknowhere">
             <img src={github} alt="GitHub" />
         </a>
+        -->
     </div>
 
     <p class="w-full text-center text-xs px-14">
@@ -21,9 +23,11 @@
     </p>
 
     <div class="corner corner-right">
+        <!--
         <a href="{base}/app/leaderboard">
             <img src={leaderboard} alt="Leaderboard" />
         </a>
+        -->
     </div>
 </footer>
 

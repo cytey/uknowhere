@@ -16,7 +16,7 @@
     <nav>
 
         <div class="tabs tabs-boxed">
-            {#if $dataStore.addressFlag}
+            {#if $dataStore.addressFlag && $dataStore.address}
                 <a href="{base}/app" class="tab tab-active">{$dataStore.address}</a>
             {:else}
                 <a href="{base}/" class="tab" class:tab-active={$page.url.pathname === '/'}>Home</a>
