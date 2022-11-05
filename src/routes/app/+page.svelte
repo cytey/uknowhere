@@ -341,7 +341,7 @@
                 on:click|preventDefault={enter}
                 data-key="enter"
                 aria-selected={submittable}
-                disabled={!submittable}
+                disabled={!submittable || !places.length}
             >
                 enter
             </button>
@@ -352,6 +352,7 @@
                 formaction="?/update"
                 name="key"
                 value="backspace"
+                disabled={!places.length}
             >
                 back
             </button>
@@ -380,6 +381,7 @@
                             formaction="?/update"
                             name="key"
                             value={letter}
+                            disabled={!places.length}
                         >
                             {letter}
                         </button>
@@ -422,7 +424,7 @@
 
     .hero {
         place-items: inherit;
-        height: calc(100vh - 270px);
+        height: calc(100vh - 240px);
     }
 
     #map {
@@ -522,7 +524,7 @@
         bottom: 0;
     }
 
-    .keyboard button[data-key='enter']:disabled, .keyboard button[data-key='tries']:disabled, .keyboard button[data-key='score']:disabled {
+    .keyboard button:disabled {
         opacity: 0.5;
     }
 
@@ -562,6 +564,12 @@
         }
         100% {
             transform: translateX(0);
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        .hero {
+            height: calc(100vh - 270px);
         }
     }
 </style>
