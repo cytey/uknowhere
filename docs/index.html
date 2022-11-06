@@ -8,18 +8,25 @@
 		<meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-6f9e7e0c.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/_page-f0049bf9.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-02a6d841.js">
+		<link rel="modulepreload" href="./_app/immutable/start-21d04893.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-d1dd279f.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-b52f9a50.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-f44e4fed.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/paths-6cd3a76e.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-e7a8047a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/stores-0bae7fa1.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-ef82195a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/stores-8fc9bd37.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/logo-ec041307.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/data-e06c757f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/data-bfacd284.js">
 		<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-ddb439f2.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/logo-9f233c75.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_page.ts-e9fa0128.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/_page-802cc2a3.js"><title>Setting</title><!-- HEAD_svelte-1s2n5i9_START --><script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU3H6lIvnp1fJxtMSm6qCbyyuvernVrsc&callback=initMap&libraries=places"></script><script>window.initMap = (position) => {
+		<link rel="modulepreload" href="./_app/immutable/chunks/_page-802cc2a3.js">
+		<script>
+			if ('serviceWorker' in navigator) {
+				addEventListener('load', function () {
+					navigator.serviceWorker.register('./service-worker.js');
+				});
+			}
+		</script><title>Setting</title><!-- HEAD_svelte-1s2n5i9_START --><script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU3H6lIvnp1fJxtMSm6qCbyyuvernVrsc&callback=initMap&libraries=places"></script><script>window.initMap = (position) => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 16,
                 center: position,
@@ -66,7 +73,7 @@
 
 
 		<script type="module" data-sveltekit-hydrate="1ja37tf">
-			import { start } from "./_app/immutable/start-02a6d841.js";
+			import { start } from "./_app/immutable/start-21d04893.js";
 
 			start({
 				env: {},

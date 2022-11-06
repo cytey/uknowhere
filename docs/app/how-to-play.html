@@ -7,7 +7,14 @@
 		<meta name="viewport" content="width=device-width" />
 		<meta http-equiv="content-security-policy" content="">
 		<link href="../_app/immutable/assets/_layout-6f9e7e0c.css" rel="stylesheet">
-		<link href="../_app/immutable/assets/_page-61d5a6c4.css" rel="stylesheet"><!-- HEAD_svelte-1s2n5i9_START --><script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU3H6lIvnp1fJxtMSm6qCbyyuvernVrsc&callback=initMap&libraries=places"></script><script>window.initMap = (position) => {
+		<link href="../_app/immutable/assets/_page-61d5a6c4.css" rel="stylesheet">
+		<script>
+			if ('serviceWorker' in navigator) {
+				addEventListener('load', function () {
+					navigator.serviceWorker.register('../service-worker.js');
+				});
+			}
+		</script><!-- HEAD_svelte-1s2n5i9_START --><script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU3H6lIvnp1fJxtMSm6qCbyyuvernVrsc&callback=initMap&libraries=places"></script><script>window.initMap = (position) => {
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 16,
                 center: position,
