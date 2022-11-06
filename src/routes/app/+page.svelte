@@ -5,6 +5,9 @@
     import {invalidateAll} from '$app/navigation';
     import {onMount, onDestroy} from "svelte";
     import {dataStore} from "/src/stores/data";
+    import homeMarkerIcon from '$lib/images/homeMarker.png';
+    import placeMarkerIcon from '$lib/images/placeMarker.png';
+    import passedMarkerIcon from '$lib/images/passedMarker.png';
 
     // export let data: PageData;
 
@@ -16,6 +19,7 @@
     /** The index of the current guess */
     // $: i = won ? -1 : data.answers.length;
     $: won = false;
+    $: lost = false;
 
     /** Whether the current guess can be submitted */
     // $: submittable = data.guesses[i]?.length === 5;
@@ -27,7 +31,8 @@
      */
     let classnames: Record<string, 'exact' | 'close' | 'missing'>;
 
-    let map, marker, placeLatLng;
+    let map, homeMarker, homeMarkerLatLng, placeMarker, placeLatLng;
+    let placeMarkers = [];
 
     $: {
         classnames = {};
@@ -72,7 +77,10 @@
                 if (placeIndex < 0) {
                     placeIndex = placeNames.length - 1;
                 }
-                marker.setMap(null);
+                if (placeMarker) {
+                    placeMarker.setMap(null);
+                    placeMarkers.pop();
+                }
                 initGuess();
                 break;
             case '>':
@@ -80,7 +88,10 @@
                 if (placeIndex >= placeNames.length) {
                     placeIndex = 0;
                 }
-                marker.setMap(null);
+                if (placeMarker) {
+                    placeMarker.setMap(null);
+                    placeMarkers.pop();
+                }
                 initGuess();
                 break;
             default:
@@ -95,30 +106,95 @@
     }
 
     function enter(event: MouseEvent) {
-        let guess = guesslah.join('');
-        if (guess === placeNames[placeIndex].toUpperCase()) {
-            score++;
-            const passed =
-                "https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png";
-            marker = new google.maps.Marker({
-                position: placeLatLng,
-                draggable: false,
-                icon: passed,
-                map: map
-            });
-
-            if (score > 9) {
-                won = true;
-            } else {
-                if (placeIndex < placeNames.length - 1) {
-                    placeIndex++;
-                    initGuess();
+        if (won || lost) {
+            placeIndex = 0;
+            for (let i in placeMarkers) {
+                if (placeMarkers[i]) {
+                    placeMarkers[i].setMap(null);
                 }
             }
+            placeMarkers = [];
+            places = [];
+            placeNames = [];
+            guesslah = [];
+            underscoreArray = [];
+            underscoreIndex = 0;
+            tries = 0;
+            score = 0;
+            won = false;
+            lost = false;
+
+            homeMarker.setAnimation(null);
+            homeMarker.setLabel(null);
         } else {
-            tries++;
-            if (score > 9) {
-                console.log('game over');
+            let guess = guesslah.join('');
+            if (guess === placeNames[placeIndex].toUpperCase()) {
+                score++;
+                placeMarker = new google.maps.Marker({
+                    position: placeLatLng,
+                    icon: {
+                        url: passedMarkerIcon,
+                        labelOrigin: new google.maps.Point(20, 45)
+                    },
+                    map: map,
+                    label: {
+                        text: guess,
+                        color: '#457B9D',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                    }
+                });
+                placeMarkers.push(placeMarker);
+
+                if (score > 0) {
+                    won = true;
+                    const lat = homeMarkerLatLng.lat();
+                    const lng = homeMarkerLatLng.lng();
+                    map.setCenter(new google.maps.LatLng(lat, lng));
+                    map.setZoom(16);
+                    homeMarker.setAnimation(google.maps.Animation.BOUNCE);
+                    homeMarker.setIcon({
+                        url: homeMarkerIcon,
+                        labelOrigin: new google.maps.Point(20, -40)
+                    });
+                    homeMarker.setLabel({
+                        text: "You WON",
+                        color: '#1D3557',
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                    });
+                } else {
+                    if (placeIndex < placeNames.length - 1) {
+                        const tempPlaceNames = placeNames;
+                        tempPlaceNames.splice(placeIndex, 1);
+                        placeNames = tempPlaceNames;
+                        const tempPlaces = places;
+                        tempPlaces.splice(placeIndex, 1);
+                        places = tempPlaces;
+                        // placeIndex++;
+                        initGuess();
+                    }
+                }
+            } else {
+                tries++;
+                if (tries > 1) {
+                    lost = true;
+                    const lat = homeMarkerLatLng.lat();
+                    const lng = homeMarkerLatLng.lng();
+                    map.setCenter(new google.maps.LatLng(lat, lng));
+                    map.setZoom(16);
+                    homeMarker.setAnimation(google.maps.Animation.BOUNCE);
+                    homeMarker.setIcon({
+                        url: homeMarkerIcon,
+                        labelOrigin: new google.maps.Point(20, -40)
+                    });
+                    homeMarker.setLabel({
+                        text: "You LOST",
+                        color: '#E63946',
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                    });
+                }
             }
         }
     }
@@ -139,25 +215,28 @@
 
     onMount(() => {
         $dataStore.addressFlag = true;
-        const googleAPAC = {lat: 1.276473557498751, lng: 103.79921450710519};
-        map = initMap(googleAPAC);
-        marker = new google.maps.Marker({
-            position: googleAPAC,
+        homeMarkerLatLng = {lat: 1.276473557498751, lng: 103.79921450710519};
+        map = initMap(homeMarkerLatLng);
+        homeMarker = new google.maps.Marker({
+            position: homeMarkerLatLng,
             draggable: true,
+            icon: {
+                url: homeMarkerIcon
+            },
             map: map
         });
         const geocoder = new google.maps.Geocoder();
         let lat, lng, address;
         let service = new google.maps.places.PlacesService(map);
-        google.maps.event.addListener(marker, 'dragend', function (marker) {
-            var latLng = marker.latLng;
-            lat = latLng.lat();
-            lng = latLng.lng();
+        google.maps.event.addListener(homeMarker, 'dragend', function (marker) {
+            homeMarkerLatLng = marker.latLng;
+            lat = homeMarkerLatLng.lat();
+            lng = homeMarkerLatLng.lng();
             setTimeout(() => {
                 map.setCenter(new google.maps.LatLng(lat, lng));
                 map.setZoom(16);
             }, 100);
-            geocoder.geocode({'latLng': latLng}, function (results, status) {
+            geocoder.geocode({'latLng': homeMarkerLatLng}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     address = results[0].formatted_address;
                     $dataStore.address = address;
@@ -165,7 +244,7 @@
                 }
             });
             let request = {
-                location: latLng,
+                location: homeMarkerLatLng,
                 radius: 500,
                 // type: []
             };
@@ -190,14 +269,12 @@
             }
         }
         placeLatLng = places[placeIndex].geometry.location;
-        const info =
-            "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png";
-        marker = new google.maps.Marker({
+        placeMarker = new google.maps.Marker({
             position: placeLatLng,
-            draggable: false,
-            icon: info,
+            icon: placeMarkerIcon,
             map: map
         });
+        placeMarkers.push(placeMarker);
         map.panTo(placeLatLng);
         underscoreArray = underscores;
         answerlah = guesslah = guess;
@@ -256,6 +333,10 @@
                 placeNames.push(place.name.toUpperCase());
             }
         }
+        if (placeMarker) {
+            placeMarker.setMap(null);
+            placeMarkers.pop();
+        }
         initGuess();
     }
 
@@ -272,20 +353,22 @@
     <div id="map"></div>
     <div class="hero-overlay bg-opacity-60">
         <div id="map-info" class="text-center my-1 w-full">
-            {#if guesslah && placeNames.length && guesslah.length}
-                {#each placeNames[placeIndex].toString().split('') as letter, column}
-                    {#if rstlne.includes(letter)}
-                        <kbd class="kbd bg-success-content text-white">{letter}</kbd>
-                    {:else if letter !== ' '}
-                        <kbd class="kbd bg-white">{guesslah[column]}</kbd>
-                    {:else}
-                        <kbd class="kbd invisible">A</kbd>
-                    {/if}
-                {/each}
-            {:else}
-                <div class="bg-white inline-block p-2 px-4 google-map-box-shadow">
-                    Drag and Drop the marker to a location <br /> with nearby places to play
-                </div>
+            {#if !won }
+                {#if guesslah && placeNames.length && guesslah.length}
+                    {#each placeNames[placeIndex].toString().split('') as letter, column}
+                        {#if rstlne.includes(letter)}
+                            <kbd class="kbd bg-success-content text-white">{letter}</kbd>
+                        {:else if letter !== ' '}
+                            <kbd class="kbd bg-white">{guesslah[column]}</kbd>
+                        {:else}
+                            <kbd class="kbd invisible">A</kbd>
+                        {/if}
+                    {/each}
+                {:else}
+                    <div class="bg-white inline-block p-2 px-4 google-map-box-shadow">
+                        Drag and Drop the <span class="font-bold text-error">RED</span> marker to a location <br /> with nearby places to play
+                    </div>
+                {/if}
             {/if}
         </div>
     </div>
@@ -342,8 +425,9 @@
                 data-key="enter"
                 aria-selected={submittable}
                 disabled={!submittable || !places.length}
+                class:selected="{won || lost}"
             >
-                enter
+                {(won || lost) ? 'replay' : 'enter'}
             </button>
 
             <button
@@ -352,7 +436,7 @@
                 formaction="?/update"
                 name="key"
                 value="backspace"
-                disabled={!places.length}
+                disabled={!places.length || won || lost}
             >
                 back
             </button>
@@ -361,14 +445,19 @@
                 data-key="tries"
                 disabled
             >
-                {tries}
+                <span class="text-error">
+                    {tries}
+                </span>
             </button>
 
             <button
                 data-key="score"
                 disabled
+                class="text-success"
             >
-                {score}
+                <span class="text-success">
+                    {score}
+                </span>
             </button>
 
             {#each ['<qwertyuiop>', 'asdfghjkl', 'zxcvbnm'] as row}
@@ -381,7 +470,7 @@
                             formaction="?/update"
                             name="key"
                             value={letter}
-                            disabled={!places.length}
+                            disabled={!places.length || won || lost}
                         >
                             {letter}
                         </button>
@@ -400,7 +489,7 @@
 			force: 0.7,
 			stageWidth: window.innerWidth,
 			stageHeight: window.innerHeight,
-			colors: ['#ff3e00', '#40b3ff', '#676778'] // Google logo colors
+			colors: ['#FF595E', '#FFCA3A', '#8AC926'] // Google logo colors
 		}}
     />
 {/if}
@@ -410,7 +499,6 @@
         position: fixed;
         top: 120px;
         z-index: 999;
-        padding: 0 1rem;
     }
 
     .kbd {
@@ -497,6 +585,12 @@
         outline: none;
     }
 
+    .keyboard button.selected {
+        background: var(--color-theme-3);
+        color: var(--color-text);
+        font-weight: bold;
+    }
+
     .keyboard button[data-key='enter'],
     .keyboard button[data-key='backspace'],
     .keyboard button[data-key='tries'],
@@ -570,6 +664,11 @@
     @media only screen and (max-width: 480px) {
         .hero {
             height: calc(100vh - 270px);
+        }
+
+        .kbd {
+            min-height: 1.8em;
+            min-width: 1.8em;
         }
     }
 </style>

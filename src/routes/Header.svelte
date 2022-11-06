@@ -16,7 +16,7 @@
     <nav>
 
         <div class="tabs tabs-boxed">
-            {#if $dataStore.addressFlag && $dataStore.address}
+            {#if $dataStore.addressFlag && $dataStore.address && $page.url.pathname.startsWith('/app')}
                 <a href="{base}/app" class="tab tab-active">{$dataStore.address}</a>
             {:else}
                 <a href="{base}/" class="tab" class:tab-active={$page.url.pathname === '/'}>Home</a>
@@ -91,5 +91,13 @@
 
     a:hover {
         color: var(--color-theme-1);
+    }
+
+    @media only screen and (max-width: 480px) {
+        nav a {
+            padding: 0 0.3rem;
+            font-size: 0.7rem;
+            letter-spacing: 0em;
+        }
     }
 </style>

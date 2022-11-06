@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "uKnowHere",
+  "short_name": "UKW",
+  "start_url": "index.html"
+}
