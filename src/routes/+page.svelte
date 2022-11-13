@@ -6,7 +6,7 @@
 
 <svelte:head>
     <title>Setting</title>
-    <meta name="description" content="UKnoWhere" />
+    <meta name="description" content="uKnoWhere" />
 </svelte:head>
 
 <div class="hero mt-10">
@@ -16,7 +16,7 @@
             <img src={logoBackup} alt="Logo" />
         </picture>
         <div>
-            <h1 class="text-5xl font-bold">UKnoWHere</h1>
+            <h1 class="text-5xl font-bold">uKnoWHere</h1>
             <h2 class="text-2xl font-semibold py-6">Here and Where</h2>
             <a href="{base}/app" class="btn btn-primary">to your new<br />Adventure</a>
         </div>

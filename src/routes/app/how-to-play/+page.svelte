@@ -4,7 +4,7 @@
 </script>
 
 <div class="text-column m-10">
-    <h1 class="text-2xl font-bold my-2">How to play UKnoWHere</h1>
+    <h1 class="text-2xl font-bold my-2">How to play uKnoWHere</h1>
     <ul class="steps steps-vertical">
         <li class="step step-info step-1">
             <div class="card bg-base-100 shadow-xl text-left">

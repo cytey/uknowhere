@@ -14,14 +14,17 @@
     </div>
 
     <nav>
-
         <div class="tabs tabs-boxed">
             {#if $dataStore.addressFlag && $dataStore.address && $page.url.pathname.startsWith('/app')}
-                <a href="{base}/app" class="tab tab-active">{$dataStore.address}</a>
+                {#if $dataStore.loading}
+                    <a href="{base}/app" class="tab tab-active">Loading...</a>
+                {:else}
+                    <a href="{base}/app" class="tab tab-active">{$dataStore.address}</a>
+                {/if}
             {:else}
                 <a href="{base}/" class="tab" class:tab-active={$page.url.pathname === '/'}>Home</a>
                 <a href="{base}/about" class="tab" class:tab-active={$page.url.pathname === '/about'}>About</a>
-                <a href="{base}/app" class="tab" class:tab-active={$page.url.pathname.startsWith('/app')}>UKnoWHere</a>
+                <a href="{base}/app" class="tab" class:tab-active={$page.url.pathname.startsWith('/app')}>uKnoWHere</a>
             {/if}
         </div>
     </nav>
@@ -50,7 +53,7 @@
     .corner {
         width: 3em;
         height: 3em;
-        min-width: 48px;
+        min-width: 60px;
     }
 
     .corner a {
@@ -62,8 +65,8 @@
     }
 
     .corner img {
-        width: 2em;
-        height: 2em;
+        width: 2.5em;
+        height: 2.5em;
         object-fit: contain;
     }
 
@@ -91,13 +94,5 @@
 
     a:hover {
         color: var(--color-theme-1);
-    }
-
-    @media only screen and (max-width: 480px) {
-        nav a {
-            padding: 0 0.3rem;
-            font-size: 0.7rem;
-            letter-spacing: 0em;
-        }
     }
 </style>

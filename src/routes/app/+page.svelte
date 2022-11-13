@@ -145,7 +145,6 @@
                     }
                 });
                 placeMarkers.push(placeMarker);
-
                 if (score > 0) {
                     won = true;
                     const lat = homeMarkerLatLng.lat();
@@ -177,6 +176,19 @@
                 }
             } else {
                 tries++;
+                console.log(guesslah);
+                let answer = placeNames[placeIndex].toUpperCase().split('');
+                for (let i = 0; i < guesslah.length; i++) {
+                    const letter = guesslah[i];
+                    console.log(answer[i], letter);
+                    if (answer[i] === letter) {
+                        answerlah[i] = 'x';
+                        classnames[letter.toLowerCase()] = 'exact';
+                    } else {
+                        answerlah[i] = answer[i] !== letter ? 'c' : 'm';
+                        classnames[letter] = answer[i] !== letter ? 'close' : 'missing';
+                    }
+                }
                 if (tries > 1) {
                     lost = true;
                     const lat = homeMarkerLatLng.lat();
@@ -213,9 +225,7 @@
     }
     */
 
-    onMount(() => {
-        $dataStore.addressFlag = true;
-        homeMarkerLatLng = {lat: 1.276473557498751, lng: 103.79921450710519};
+    const locate = () => {
         map = initMap(homeMarkerLatLng);
         homeMarker = new google.maps.Marker({
             position: homeMarkerLatLng,
@@ -223,9 +233,18 @@
             icon: {
                 url: homeMarkerIcon
             },
-            map: map
+            map: map,
+            zIndex: 9
         });
         const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'latLng': homeMarkerLatLng}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                address = results[0].formatted_address;
+                $dataStore.address = address;
+                $dataStore.placePointer = 0;
+            }
+        });
+
         let lat, lng, address;
         let service = new google.maps.places.PlacesService(map);
         google.maps.event.addListener(homeMarker, 'dragend', function (marker) {
@@ -250,6 +269,28 @@
             };
             service.nearbySearch(request, callbackPlaces);
         });
+
+        map.addListener('tilesloaded', function () {
+            $dataStore.loading = false;
+        });
+    }
+
+    onMount(() => {
+        $dataStore.addressFlag = true;
+        homeMarkerLatLng = {lat: 1.276473557498751, lng: 103.79921450710519};
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                homeMarkerLatLng = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                locate();
+            }, () => {
+                locate();
+            });
+        } else {
+            locate();
+        }
     })
 
     const initGuess = () => {
@@ -277,7 +318,7 @@
         placeMarkers.push(placeMarker);
         map.panTo(placeLatLng);
         underscoreArray = underscores;
-        answerlah = guesslah = guess;
+        guesslah = guess;
     }
 
     const wantedTypes = [
@@ -341,6 +382,7 @@
     }
 
     onDestroy(() => {
+        $dataStore.loading = true;
         $dataStore.addressFlag = false;
     })
 </script>
@@ -359,7 +401,13 @@
                         {#if rstlne.includes(letter)}
                             <kbd class="kbd bg-success-content text-white">{letter}</kbd>
                         {:else if letter !== ' '}
-                            <kbd class="kbd bg-white">{guesslah[column]}</kbd>
+                            {@const answer = answerlah[column]}
+                            <kbd class="kbd bg-white"
+                                 class:exact={answer === 'x'}
+                                 class:close={answer === 'c'}
+                            >
+                                {guesslah[column]}
+                            </kbd>
                         {:else}
                             <kbd class="kbd invisible">A</kbd>
                         {/if}
@@ -460,7 +508,7 @@
                 </span>
             </button>
 
-            {#each ['<qwertyuiop>', 'asdfghjkl', 'zxcvbnm'] as row}
+            {#each ['<qwyuiop>', 'adfghjk', 'zxcvbm'] as row}
                 <div class="row">
                     {#each row as letter}
                         <button
@@ -504,6 +552,16 @@
     .kbd {
         box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
         margin: 3px 0;
+    }
+
+    .kbd.exact {
+        border: 2px solid var(--color-theme-2);
+        background: var(--color-theme-3);
+        color: #000;
+    }
+
+    .kbd.close {
+        border: 2px solid #FF595E;
     }
 
     .google-map-box-shadow {
