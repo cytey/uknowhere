@@ -732,5 +732,10 @@
             min-height: 1.8em;
             min-width: 1.8em;
         }
+
+        .hero {
+            place-items: inherit;
+            height: calc(100vh - 250px);
+        }
     }
 </style>

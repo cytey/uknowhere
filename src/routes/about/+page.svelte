@@ -42,16 +42,16 @@
     </p>
     <h1 class="text-2xl font-bold my-2 mt-14">Unique user experience</h1>
     <p class="my-4">
-        <b>uKnoWHere</b> feature an unique keyboard layout during gameplay. Inspired from Wheel of Fortune, I called this keyboard layout with score system: <b>!RSTLNE0</b>. In Wheel of Fortune,
-        the letters R S T L N E are always given to the players for the final puzzle. Hence, there is no need for these keys in the keyboard. You may look out the reason why
+        <b>uKnoWHere</b> feature a unique keyboard layout during gameplay. Inspired by Wheel of Fortune, I called this keyboard layout with a scoring system: !RSTLNE0. In Wheel of Fortune, the letters
+        <b>R S T L N E</b> are always given to the players for the final puzzle. Hence, there is no need for these keys on the keyboard. You may look out for the reason why
         <a class="underline font-semibold" target="_blank" rel="noreferrer" href="https://www.quora.com/What-prompted-Wheel-of-Fortune-to-use-the-letters-R-S-T-L-N-and-E-in-the-bonus-round">here</a>.
     </p>
     <p class="my-4">
-        <b>uKnoWHere</b> also feature an unique responsive minimalist layout with on-screen keyboard. Elements are placed strategically both on/off the map canvas. On-screen keyboard ensures that
-        players can use the default Google Maps keyboard shortcuts for map explorations with off-screen keyboard instead, giving an alternate option for better controls.
+        <b>uKnoWHere</b> also features a unique responsive minimalist layout with an on-screen keyboard. Elements are placed strategically both on/off the map canvas. The on-screen keyboard ensures
+        that players can use the default Google Maps keyboard shortcuts for map explorations with the off-screen keyboard instead, giving an alternate option for better controls
     </p>
     <p class="my-4">
-        I hope that <b>!RSTLNE0</b> keyboard layout and this responsive minimalist layout with on-screen keyboard will give rise to better unique idea and map experience.
+        I hope that <b>!RSTLNE0</b> keyboard layout and this responsive minimalist layout with an on-screen keyboard will give rise to a better unique idea and map experience.
     </p>
     <h1 class="text-2xl font-bold my-2 mt-14">Google Maps APIs used</h1>
     <p class="my-4">
