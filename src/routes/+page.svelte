@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-    <title>Setting</title>
+    <title>uKnoWhere</title>
     <meta name="description" content="uKnoWhere" />
 </svelte:head>
 
