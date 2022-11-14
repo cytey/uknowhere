@@ -6,17 +6,17 @@
 		<link rel="manifest" href="./manifest.webmanifest" />
 		<meta name="viewport" content="width=device-width" />
 		<meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-f40276cb.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/_page-43cc939d.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-36853f8e.js">
+		<link href="./_app/immutable/assets/_layout-95a1de94.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/_page-f5c2e0e9.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-5caf5cb1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-d1dd279f.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d9037c8f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-a8ed1bb3.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/paths-6cd3a76e.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-f2c4525a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/stores-33e8e4ac.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-a213e119.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/stores-f9ea531d.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/logo-ec041307.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/data-9b155653.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/app/_page.svelte-80bc8622.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/data-db62449f.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/app/_page.svelte-6e8964a1.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/app/_page.ts-657f5554.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_page-348b1a66.js">
 		<script>
@@ -50,13 +50,13 @@
 </header>
     <main class="svelte-1fzzkov">
 
-<div class="hero svelte-1uyslha"><div id="map" class="svelte-1uyslha"></div>
-    <div class="hero-overlay bg-opacity-60"><div id="map-info" class="text-center my-1 w-full svelte-1uyslha"><div class="bg-white inline-block p-2 px-4 google-map-box-shadow svelte-1uyslha">Drag and Drop the <span class="font-bold text-error">RED</span> marker to a location <br> with nearby places to play
+<div class="hero svelte-1vvgnfh"><div id="map" class="svelte-1vvgnfh"></div>
+    <div class="hero-overlay bg-opacity-60"><div id="map-info" class="text-center my-1 w-full svelte-1vvgnfh"><div class="bg-white inline-block p-2 px-4 google-map-box-shadow svelte-1vvgnfh">Drag and Drop the <span class="font-bold text-error">RED</span> marker to a location <br> with nearby places to play
                     </div></div></div></div>
 
-<form method="POST" action="?/enter" class="svelte-1uyslha">
+<form method="POST" action="?/enter" class="svelte-1vvgnfh">
 
-    <div class="controls svelte-1uyslha">
+    <div class="controls svelte-1vvgnfh">
         
         
         
@@ -64,61 +64,57 @@
         
         
         
-        <div class="keyboard svelte-1uyslha"><button data-key="enter" aria-selected="true" disabled class="svelte-1uyslha">enter</button>
-
-            <button data-key="backspace" formaction="?/update" name="key" value="backspace" disabled class="svelte-1uyslha">back
+        <div class="keyboard svelte-1vvgnfh"><button data-key="tries" disabled class="svelte-1vvgnfh"><span class="text-error">0</span></button>
+            <button data-key="score" disabled class="text-success svelte-1vvgnfh"><span class="text-success">0</span></button>
+            <button data-key="enter" aria-selected="true" disabled class="svelte-1vvgnfh">enter</button>
+            <button data-key="backspace" formaction="?/update" name="key" value="backspace" disabled class="svelte-1vvgnfh">back
             </button>
-
-            <button data-key="tries" disabled class="svelte-1uyslha"><span class="text-error">0</span></button>
-
-            <button data-key="score" disabled class="text-success svelte-1uyslha"><span class="text-success">0</span></button>
-
-            <div class="row svelte-1uyslha"><button data-key="<" class=" svelte-1uyslha" formaction="?/update" name="key" value="<" disabled>&lt;
-                        </button><button data-key="q" class=" svelte-1uyslha" formaction="?/update" name="key" value="q" disabled>q
-                        </button><button data-key="w" class=" svelte-1uyslha" formaction="?/update" name="key" value="w" disabled>w
-                        </button><button data-key="y" class=" svelte-1uyslha" formaction="?/update" name="key" value="y" disabled>y
-                        </button><button data-key="u" class=" svelte-1uyslha" formaction="?/update" name="key" value="u" disabled>u
-                        </button><button data-key="i" class=" svelte-1uyslha" formaction="?/update" name="key" value="i" disabled>i
-                        </button><button data-key="o" class=" svelte-1uyslha" formaction="?/update" name="key" value="o" disabled>o
-                        </button><button data-key="p" class=" svelte-1uyslha" formaction="?/update" name="key" value="p" disabled>p
-                        </button><button data-key=">" class=" svelte-1uyslha" formaction="?/update" name="key" value=">" disabled>>
+            <div class="row svelte-1vvgnfh"><button data-key="<" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="<" disabled>&lt;
+                        </button><button data-key="q" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="q" disabled>q
+                        </button><button data-key="w" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="w" disabled>w
+                        </button><button data-key="y" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="y" disabled>y
+                        </button><button data-key="u" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="u" disabled>u
+                        </button><button data-key="i" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="i" disabled>i
+                        </button><button data-key="o" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="o" disabled>o
+                        </button><button data-key="p" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="p" disabled>p
+                        </button><button data-key=">" class=" svelte-1vvgnfh" formaction="?/update" name="key" value=">" disabled>>
                         </button>
-                </div><div class="row svelte-1uyslha"><button data-key="a" class=" svelte-1uyslha" formaction="?/update" name="key" value="a" disabled>a
-                        </button><button data-key="d" class=" svelte-1uyslha" formaction="?/update" name="key" value="d" disabled>d
-                        </button><button data-key="f" class=" svelte-1uyslha" formaction="?/update" name="key" value="f" disabled>f
-                        </button><button data-key="g" class=" svelte-1uyslha" formaction="?/update" name="key" value="g" disabled>g
-                        </button><button data-key="h" class=" svelte-1uyslha" formaction="?/update" name="key" value="h" disabled>h
-                        </button><button data-key="j" class=" svelte-1uyslha" formaction="?/update" name="key" value="j" disabled>j
-                        </button><button data-key="k" class=" svelte-1uyslha" formaction="?/update" name="key" value="k" disabled>k
+                </div><div class="row svelte-1vvgnfh"><button data-key="a" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="a" disabled>a
+                        </button><button data-key="d" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="d" disabled>d
+                        </button><button data-key="f" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="f" disabled>f
+                        </button><button data-key="g" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="g" disabled>g
+                        </button><button data-key="h" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="h" disabled>h
+                        </button><button data-key="j" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="j" disabled>j
+                        </button><button data-key="k" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="k" disabled>k
                         </button>
-                </div><div class="row svelte-1uyslha"><button data-key="z" class=" svelte-1uyslha" formaction="?/update" name="key" value="z" disabled>z
-                        </button><button data-key="x" class=" svelte-1uyslha" formaction="?/update" name="key" value="x" disabled>x
-                        </button><button data-key="c" class=" svelte-1uyslha" formaction="?/update" name="key" value="c" disabled>c
-                        </button><button data-key="v" class=" svelte-1uyslha" formaction="?/update" name="key" value="v" disabled>v
-                        </button><button data-key="b" class=" svelte-1uyslha" formaction="?/update" name="key" value="b" disabled>b
-                        </button><button data-key="m" class=" svelte-1uyslha" formaction="?/update" name="key" value="m" disabled>m
+                </div><div class="row svelte-1vvgnfh"><button data-key="z" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="z" disabled>z
+                        </button><button data-key="x" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="x" disabled>x
+                        </button><button data-key="c" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="c" disabled>c
+                        </button><button data-key="v" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="v" disabled>v
+                        </button><button data-key="b" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="b" disabled>b
+                        </button><button data-key="m" class=" svelte-1vvgnfh" formaction="?/update" name="key" value="m" disabled>m
                         </button>
                 </div></div>
         </div></form>
 
 </main>
-    <footer class="flex items-center svelte-26g32h"><div class="corner corner-left svelte-26g32h"></div>
+    <footer class="flex items-center svelte-132r527"><div class="corner corner-left svelte-132r527"></div>
 
-    <p class="w-full text-center text-xs px-14 svelte-26g32h">Powered by
-        <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/" class="svelte-26g32h">Google Maps Platform</a> |
-        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/" class="svelte-26g32h">SvelteKit</a> | <br>
-        <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/" class="svelte-26g32h">Tailwind CSS</a> |
-        <a target="_blank" rel="noreferrer" href="https://daisyui.com/" class="svelte-26g32h">DaisyUI</a> |
-        <a target="_blank" rel="noreferrer" href="https://pages.github.com/" class="svelte-26g32h">GitHub Pages</a> <br>
-        <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map" class="svelte-26g32h">Map icons created by kmg design - Flaticon</a></p>
+    <p class="w-full text-center text-xs svelte-132r527">Powered by
+        <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/" class="svelte-132r527">Google Maps Platform</a> |
+        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/" class="svelte-132r527">SvelteKit</a> | <br>
+        <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/" class="svelte-132r527">Tailwind CSS</a> |
+        <a target="_blank" rel="noreferrer" href="https://daisyui.com/" class="svelte-132r527">DaisyUI</a> |
+        <a target="_blank" rel="noreferrer" href="https://pages.github.com/" class="svelte-132r527">GitHub Pages</a> <br>
+        <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map" class="svelte-132r527">Map icons created by kmg design - Flaticon</a></p>
 
-    <div class="corner corner-right svelte-26g32h"></div>
+    <div class="corner corner-right svelte-132r527"></div>
 </footer>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1lfp8ai">
-			import { start } from "./_app/immutable/start-36853f8e.js";
+		<script type="module" data-sveltekit-hydrate="ff3bui">
+			import { start } from "./_app/immutable/start-5caf5cb1.js";
 
 			start({
 				env: {},
@@ -132,7 +128,7 @@
 					form: null
 				},
 				paths: {"base":"","assets":""},
-				target: document.querySelector('[data-sveltekit-hydrate="1lfp8ai"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="ff3bui"]').parentNode,
 				trailing_slash: "never"
 			});
 		</script>

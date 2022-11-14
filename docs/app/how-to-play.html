@@ -6,8 +6,8 @@
 		<link rel="manifest" href="../manifest.webmanifest" />
 		<meta name="viewport" content="width=device-width" />
 		<meta http-equiv="content-security-policy" content="">
-		<link href="../_app/immutable/assets/_layout-f40276cb.css" rel="stylesheet">
-		<link href="../_app/immutable/assets/_page-61d5a6c4.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_layout-95a1de94.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/_page-02315062.css" rel="stylesheet">
 		<script>
 			if ('serviceWorker' in navigator) {
 				addEventListener('load', function () {
@@ -38,57 +38,80 @@
     <div class="corner svelte-17rb8pi"><a href="/app/how-to-play" class="svelte-17rb8pi"><img src="/_app/immutable/assets/warning-4963f440.png" alt="Help" class="svelte-17rb8pi"></a></div>
 </header>
     <main class="svelte-1fzzkov"><div class="text-column m-10"><h1 class="text-2xl font-bold my-2">How to play uKnoWHere</h1>
-    <ul class="steps steps-vertical svelte-116bwlt"><li class="step step-info step-1 svelte-116bwlt"><div class="card bg-base-100 shadow-xl text-left svelte-116bwlt"><div class="card-body"><p>To play, first choose any location on the map by dropping the marker:
-                        <picture><source srcset="/_app/immutable/assets/logo-0da374d1.webp" type="image/webp">
-                            <img src="/_app/immutable/assets/logo-c6431890.png" alt="Logo" class="svelte-116bwlt"></picture>
-                        The objective of the game is to guess as many nearby places from the chosen marker location by entering a <b>Place Name</b> correctly.
-                    </p>
-                    <p>Each correct guess will add up to the Total Score. Game is over after <b>10</b> incorrect guesses.
-                    </p></div></div></li>
-        <li class="step step-error svelte-116bwlt"><div class="card bg-base-100 shadow-xl text-left svelte-116bwlt"><div class="card-body"><p>Enter the <b>Place Name</b>. For example:
-                    </p>
-                    <div class="example svelte-116bwlt"><span class="close svelte-116bwlt">r</span>
-                        <span class="missing svelte-116bwlt">i</span>
-                        <span class="close svelte-116bwlt">t</span>
-                        <span class="missing svelte-116bwlt">z</span>
-                        <span class="exact svelte-116bwlt">y</span></div>
-                    <p class="svelte-116bwlt">The <span class="exact svelte-116bwlt">y</span> is in the right place. <span class="close svelte-116bwlt">r</span> and
-                        <span class="close svelte-116bwlt">t</span>
-                        are the right letters, but in the wrong position. The other letters are wrong, and can be discarded.
-                    </p></div></div></li>
-        <li class="step step-success svelte-116bwlt"><div class="card bg-base-100 shadow-xl text-left svelte-116bwlt"><div class="card-body"><p>Let&#39;s make another attempt:
-                    </p>
-                    <div class="example svelte-116bwlt"><span class="exact svelte-116bwlt">p</span>
-                        <span class="exact svelte-116bwlt">a</span>
-                        <span class="exact svelte-116bwlt">r</span>
-                        <span class="exact svelte-116bwlt">t</span>
-                        <span class="exact svelte-116bwlt">y</span></div>
-                    <p>Bingo! You score a point and now you can guess your next <b>Place Name</b></p></div></div></li>
-        <li class="step step-warning svelte-116bwlt"><div class="card bg-base-100 shadow-xl text-left svelte-116bwlt"><div class="card-body"><p class="my-2">There will be several rows of <b>Nearest Road Name</b> if the location is connected to more than 1 road.
-                        By entering a <b>Nearest Road Name</b> of your choice, Google Map will bring you to that location to continue the game.
-                    </p>
-                    <div class="example svelte-116bwlt"><span class="exact svelte-116bwlt">p</span>
-                        <span class="exact svelte-116bwlt">a</span>
-                        <span class="exact svelte-116bwlt">r</span>
-                        <span class="exact svelte-116bwlt">t</span>
-                        <span class="exact svelte-116bwlt">y</span></div>
-                    <div class="example svelte-116bwlt"><span class="exact svelte-116bwlt">p</span>
-                        <span class="exact svelte-116bwlt">a</span>
-                        <span class="exact svelte-116bwlt">r</span>
-                        <span class="exact svelte-116bwlt">t</span>
-                        <span class="exact svelte-116bwlt">y</span></div></div></div></li></ul>
+    <ul class="steps steps-vertical svelte-rzdngf"><li class="step step-error step-1 svelte-rzdngf"><div class="card bg-base-100 shadow-xl text-left svelte-rzdngf"><div class="card-body"><div>To play, allow the app to access your current location. If geolocation is not enabled, game will start from Google Asia Pacific, Singapore.
+                        <picture><source srcset="/_app/immutable/assets/Step1-3651ea0e.png" type="image/png">
+                            <img src="/_app/immutable/assets/Step1-3651ea0e.png" alt="Step1" class="svelte-rzdngf"></picture>
+                        First choose any location on the map by dragging and dropping the <p class="font-bold text-error inline">RED</p> marker from the loaded location.
+                    </div></div></div></li>
+        <li class="step step-warning step-2 svelte-rzdngf"><div class="card bg-base-100 shadow-xl text-left svelte-rzdngf"><div class="card-body"><div>A <p class="font-bold text-warning inline">YELLOW</p> marker with the letter tiles will appear as the nearby place to guess. The letters <b>R S T L N E</b> are shown as part of
+                        the game to make it easier to guess.
+                        <picture><source srcset="/_app/immutable/assets/Step2-a2d1450c.png" type="image/png">
+                            <img src="/_app/immutable/assets/Step2-a2d1450c.png" alt="Step2" class="svelte-rzdngf"></picture>
+                        The objective of the game is to guess nearby places from the chosen marker location by entering a <b>Place Name</b> correctly.
+                        Each correct guess will add up to the Total Score. Game is over after either <b>10</b> correct or incorrect guesses.
+                    </div></div></div></li>
+        <li class="step step-success svelte-rzdngf"><div class="card bg-base-100 shadow-xl text-left svelte-rzdngf"><div class="card-body"><div>Use the <b>!RSTLNE0</b> on-screen keyboard to solve the <b>Place Name</b> puzzle. Press &quot;ENTER&quot; to submit your answer and press &quot;BACK&quot; to key in the letters again.
+                        <picture><source srcset="/_app/immutable/assets/Step3-02281c31.png" type="image/png">
+                            <img src="/_app/immutable/assets/Step3-02281c31.png" alt="Step3" class="svelte-rzdngf"></picture>
+                        Incorrect submission will add to the <p class="font-bold text-error inline">RED</p> score
+                        <button name="key" disabled class="svelte-rzdngf"><div class="text-error">0</div></button>
+                        on the LEFT. Correct submission will add to the
+                        <p class="font-bold text-success inline">GREEN</p> score
+                        <button name="key" disabled class="svelte-rzdngf"><div class="text-success">0</div></button>
+                        on the RIGHT. If you are unable to solve the current <b>Place Name</b> puzzle, you may toggle
+                        <button name="key" disabled class="svelte-rzdngf">&lt;</button>
+                        or
+                        <button name="key" disabled class="svelte-rzdngf">&gt;</button>
+                        arrows to skip
+                        to the next <b>Place Name</b> puzzle with no penalty.
+                        You may also drag and drop the <p class="font-bold text-error inline">RED</p> marker to a new location where you feel you are more confident to score.
+                    </div></div></div></li>
+        <li class="step step-info svelte-rzdngf"><div class="card bg-base-100 shadow-xl text-left svelte-rzdngf"><div class="card-body"><div>Enter the <b>Place Name</b>. For example:
+                    </div>
+                    <div class="example svelte-rzdngf"><kbd class="kbd bg-white exact svelte-rzdngf">H</kbd>
+                        <kbd class="kbd bg-white exact svelte-rzdngf">O</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">R</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">T</kbd>
+                        <kbd class="kbd bg-white close svelte-rzdngf">F</kbd>
+                        <kbd class="kbd bg-white close svelte-rzdngf">O</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">R</kbd>
+                        <kbd class="kbd bg-white close svelte-rzdngf">D</kbd></div>
+                    <div>The <kbd class="kbd bg-white exact svelte-rzdngf">H</kbd> and <kbd class="kbd bg-white exact svelte-rzdngf">O</kbd> are the right letters. <kbd class="kbd bg-white close svelte-rzdngf">F</kbd>,
+                        <kbd class="kbd bg-white close svelte-rzdngf">O</kbd> and <kbd class="kbd bg-white close svelte-rzdngf">D</kbd> are the wrong letters. Oh no, you made an incorrect guess.
+                        <button name="key" disabled class="svelte-rzdngf"><div class="text-error">1</div></button></div>
+                    <hr>
+                    <div>Let&#39;s make another attempt:
+                    </div>
+                    <div class="example svelte-rzdngf"><kbd class="kbd bg-white exact svelte-rzdngf">H</kbd>
+                        <kbd class="kbd bg-white exact svelte-rzdngf">O</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">R</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">T</kbd>
+                        <kbd class="kbd bg-white exact svelte-rzdngf">P</kbd>
+                        <kbd class="kbd bg-white exact svelte-rzdngf">A</kbd>
+                        <kbd class="kbd bg-success-content text-white svelte-rzdngf">R</kbd>
+                        <kbd class="kbd bg-white exact svelte-rzdngf">K</kbd></div>
+                    <div>Bingo! You score a point
+                        <button name="key" disabled class="svelte-rzdngf"><div>1</div></button>
+                        and now you can guess your next <b>Place Name</b></div></div></div></li>
+        <li class="step step-info svelte-rzdngf"><div class="card bg-base-100 shadow-xl text-left svelte-rzdngf"><div class="card-body"><div class="my-2">If you are feeling stuck, you can make use of Google Maps functionalities such as Zoom and Street View to look for hints to solve the puzzle. Sometimes, the
+                        answers can be found directly from the labels on the map. In this case, &quot;HortPark&quot; is on the map! Again, the main objective is to have fun solo or as a group during your
+                        free time. During the fun, you will discover amazing places and the breadth of capabilities Google Maps Platform has to offer.
+                        <picture><source srcset="/_app/immutable/assets/Step4-7e3b3009.png" type="image/png">
+                            <img src="/_app/immutable/assets/Step4-7e3b3009.png" alt="Step4" class="svelte-rzdngf"></picture>
+                        Enjoy~ and try to win the game!
+                    </div></div></div></li></ul>
 </div></main>
-    <footer class="flex items-center svelte-26g32h"><div class="corner corner-left svelte-26g32h"></div>
+    <footer class="flex items-center svelte-132r527"><div class="corner corner-left svelte-132r527"></div>
 
-    <p class="w-full text-center text-xs px-14 svelte-26g32h">Powered by
-        <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/" class="svelte-26g32h">Google Maps Platform</a> |
-        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/" class="svelte-26g32h">SvelteKit</a> | <br>
-        <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/" class="svelte-26g32h">Tailwind CSS</a> |
-        <a target="_blank" rel="noreferrer" href="https://daisyui.com/" class="svelte-26g32h">DaisyUI</a> |
-        <a target="_blank" rel="noreferrer" href="https://pages.github.com/" class="svelte-26g32h">GitHub Pages</a> <br>
-        <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map" class="svelte-26g32h">Map icons created by kmg design - Flaticon</a></p>
+    <p class="w-full text-center text-xs svelte-132r527">Powered by
+        <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/" class="svelte-132r527">Google Maps Platform</a> |
+        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/" class="svelte-132r527">SvelteKit</a> | <br>
+        <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/" class="svelte-132r527">Tailwind CSS</a> |
+        <a target="_blank" rel="noreferrer" href="https://daisyui.com/" class="svelte-132r527">DaisyUI</a> |
+        <a target="_blank" rel="noreferrer" href="https://pages.github.com/" class="svelte-132r527">GitHub Pages</a> <br>
+        <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map" class="svelte-132r527">Map icons created by kmg design - Flaticon</a></p>
 
-    <div class="corner corner-right svelte-26g32h"></div>
+    <div class="corner corner-right svelte-132r527"></div>
 </footer>
 </div>
 

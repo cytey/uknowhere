@@ -13,13 +13,13 @@
         -->
     </div>
 
-    <p class="w-full text-center text-xs px-14">
+    <p class="w-full text-center text-xs">
         Powered by
         <a target="_blank" rel="noreferrer" href="https://mapsplatform.google.com/">Google Maps Platform</a> |
-        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/">SvelteKit</a> | <br/>
+        <a target="_blank" rel="noreferrer" href="https://kit.svelte.dev/">SvelteKit</a> | <br />
         <a target="_blank" rel="noreferrer" href="https://tailwindcss.com/">Tailwind CSS</a> |
         <a target="_blank" rel="noreferrer" href="https://daisyui.com/">DaisyUI</a> |
-        <a target="_blank" rel="noreferrer" href="https://pages.github.com/">GitHub Pages</a> <br/>
+        <a target="_blank" rel="noreferrer" href="https://pages.github.com/">GitHub Pages</a> <br />
         <a target="_blank" rel="noreferrer" href="https://www.flaticon.com/free-icons/map">Map icons created by kmg design - Flaticon</a>
     </p>
 
@@ -65,5 +65,12 @@
 
     a:hover {
         color: var(--color-theme-1);
+    }
+
+
+    @media only screen and (max-width: 480px) {
+        p {
+            font-size: 10px;
+        }
     }
 </style>

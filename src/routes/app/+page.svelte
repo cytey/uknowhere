@@ -117,6 +117,8 @@
             places = [];
             placeNames = [];
             guesslah = [];
+            answerlah = [];
+            classnames = {};
             underscoreArray = [];
             underscoreIndex = 0;
             tries = 0;
@@ -145,7 +147,7 @@
                     }
                 });
                 placeMarkers.push(placeMarker);
-                if (score > 0) {
+                if (score > 9) {
                     won = true;
                     const lat = homeMarkerLatLng.lat();
                     const lng = homeMarkerLatLng.lng();
@@ -176,11 +178,9 @@
                 }
             } else {
                 tries++;
-                console.log(guesslah);
                 let answer = placeNames[placeIndex].toUpperCase().split('');
                 for (let i = 0; i < guesslah.length; i++) {
                     const letter = guesslah[i];
-                    console.log(answer[i], letter);
                     if (answer[i] === letter) {
                         answerlah[i] = 'x';
                         classnames[letter.toLowerCase()] = 'exact';
@@ -189,7 +189,7 @@
                         classnames[letter] = answer[i] !== letter ? 'close' : 'missing';
                     }
                 }
-                if (tries > 1) {
+                if (tries > 9) {
                     lost = true;
                     const lat = homeMarkerLatLng.lat();
                     const lng = homeMarkerLatLng.lng();
@@ -234,7 +234,7 @@
                 url: homeMarkerIcon
             },
             map: map,
-            zIndex: 9
+            zIndex: 999
         });
         const geocoder = new google.maps.Geocoder();
         geocoder.geocode({'latLng': homeMarkerLatLng}, function (results, status) {
@@ -297,7 +297,7 @@
         underscoreIndex = 0;
         let guess = [];
         let underscores = [];
-        if (placeNames.length) {
+        if (placeNames.length && placeNames[placeIndex].length) {
             for (var i = 0; i < placeNames[placeIndex].length; i++) {
                 if (rstlne.includes(placeNames[placeIndex][i])) {
                     guess.push(placeNames[placeIndex][i]);
@@ -308,17 +308,20 @@
                     guess.push(' ');
                 }
             }
+
+            placeLatLng = places[placeIndex].geometry.location;
+            placeMarker = new google.maps.Marker({
+                position: placeLatLng,
+                icon: placeMarkerIcon,
+                map: map
+            });
+            placeMarkers.push(placeMarker);
+            map.panTo(placeLatLng);
         }
-        placeLatLng = places[placeIndex].geometry.location;
-        placeMarker = new google.maps.Marker({
-            position: placeLatLng,
-            icon: placeMarkerIcon,
-            map: map
-        });
-        placeMarkers.push(placeMarker);
-        map.panTo(placeLatLng);
         underscoreArray = underscores;
         guesslah = guess;
+        answerlah = [];
+        classnames = {};
     }
 
     const wantedTypes = [
@@ -469,27 +472,6 @@
         <!--{:else}-->
         <div class="keyboard">
             <button
-                on:click|preventDefault={enter}
-                data-key="enter"
-                aria-selected={submittable}
-                disabled={!submittable || !places.length}
-                class:selected="{won || lost}"
-            >
-                {(won || lost) ? 'replay' : 'enter'}
-            </button>
-
-            <button
-                on:click|preventDefault={update}
-                data-key="backspace"
-                formaction="?/update"
-                name="key"
-                value="backspace"
-                disabled={!places.length || won || lost}
-            >
-                back
-            </button>
-
-            <button
                 data-key="tries"
                 disabled
             >
@@ -497,7 +479,6 @@
                     {tries}
                 </span>
             </button>
-
             <button
                 data-key="score"
                 disabled
@@ -507,7 +488,25 @@
                     {score}
                 </span>
             </button>
-
+            <button
+                on:click|preventDefault={enter}
+                data-key="enter"
+                aria-selected={submittable}
+                disabled={!submittable || !places.length}
+                class:selected="{won || lost}"
+            >
+                {(won || lost) ? 'replay' : 'enter'}
+            </button>
+            <button
+                on:click|preventDefault={update}
+                data-key="backspace"
+                formaction="?/update"
+                name="key"
+                value="backspace"
+                disabled={underscoreIndex == 0 || !places.length || won || lost}
+            >
+                back
+            </button>
             {#each ['<qwyuiop>', 'adfghjk', 'zxcvbm'] as row}
                 <div class="row">
                     {#each row as letter}
@@ -556,7 +555,7 @@
 
     .kbd.exact {
         border: 2px solid var(--color-theme-2);
-        background: var(--color-theme-3);
+        background: #F1FAEE;
         color: #000;
     }
 
@@ -570,7 +569,7 @@
 
     .hero {
         place-items: inherit;
-        height: calc(100vh - 240px);
+        height: calc(100vh - 230px);
     }
 
     #map {
@@ -614,7 +613,7 @@
 
     .keyboard button,
     .keyboard button:disabled {
-        --size: min(7vw, 4vh, 40px);
+        --size: min(10vw, 6vh, 60px);
         background-color: white;
         color: black;
         width: var(--size);
@@ -654,26 +653,35 @@
     .keyboard button[data-key='tries'],
     .keyboard button[data-key='score'] {
         position: absolute;
-        bottom: calc(1 / 3 * (100% - 2 * var(--gap)) + 0.18rem);
-        width: calc(1.5 * var(--size));
+        bottom: 0;
+        width: calc(1.55 * var(--size));
         height: calc(1 / 3 * (100% - 2 * var(--gap)));
         text-transform: uppercase;
         font-size: calc(0.3 * var(--size));
-        padding-top: calc(0.15 * var(--size));
     }
 
-    .keyboard button[data-key='enter'], .keyboard button[data-key='tries'] {
-        right: calc(50% + 4.68 * var(--size) + 0.8rem);
+    .keyboard button[data-key='enter'] {
+        right: calc(50% + 2.95 * var(--size) + 0.8rem);
     }
 
-    .keyboard button[data-key='backspace'], .keyboard button[data-key='score'] {
-        left: calc(50% + 4.68 * var(--size) + 0.8rem);
+    .keyboard button[data-key='tries'] {
+        right: calc(50% + 3.5 * var(--size) + 0.8rem);
+    }
+
+    .keyboard button[data-key='backspace'] {
+        left: calc(50% + 2.95 * var(--size) + 0.8rem);
+    }
+
+    .keyboard button[data-key='score'] {
+        left: calc(50% + 3.5 * var(--size) + 0.8rem);
     }
 
     .keyboard button[data-key='tries'], .keyboard button[data-key='score'] {
-        font-size: calc(1 * var(--size));
+        width: calc(1 * var(--size));
+        font-size: calc(0.7 * var(--size));
+        line-height: calc(0.7 * var(--size));
         padding: 0;
-        bottom: 0;
+        bottom: calc(1 / 3 * (100% - 2 * var(--gap)) + 0.18rem);
     }
 
     .keyboard button:disabled {
@@ -720,10 +728,6 @@
     }
 
     @media only screen and (max-width: 480px) {
-        .hero {
-            height: calc(100vh - 270px);
-        }
-
         .kbd {
             min-height: 1.8em;
             min-width: 1.8em;
